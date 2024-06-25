@@ -1,5 +1,5 @@
 # AIMBOTproject
-这里是AI fundamental期末大作业项目
+这里是AI fundamental期末大作业项目 by 唐硕10225101447 
 
 代码在对应分支
 
