@@ -1,16 +1,11 @@
 
 
 from ultralytics import YOLOv10
-
 # 指定模型权重文件的路径
 model_path = ".\models\\v10nbest.pt"
-
 # 加载模型
 model = YOLOv10(model_path)
-
-
-
-#需要安装pip install mss opencv-python torch matplotlib torchvision pandas keyboard
+#需要在yolov10依赖基础上安装pip install mss pandas keyboard
 import cv2
 import numpy as np
 import mss
@@ -66,8 +61,11 @@ def calculate_center_distance(results_boxes, image_width=640, image_height=640):
         
         # 遍历所有检测框
         for idx, box in enumerate(boxes_xyxy):
+            width = abs(box[2] - box[0])
+            height = abs(box[3] - box[1])
+            # 判断高度是否大于宽度
             # 检查类别ID是否为1或2
-            if classes[idx] in targetlist:
+            if classes[idx] in targetlist and height > width:
                 # 计算边界框中心坐标
                 box_center = (((box[2] + box[0]) / 2), ((box[3] + box[1]) / 2))  # 注意这里的顺序对应xyxy
                 
@@ -97,11 +95,9 @@ def main():
     with mss.mss() as sct:
         # 自定义截屏区域
         monitor = {"top": 220, "left": 640, "width": 640, "height": 640}
-
         #调试单次可detect BGR IMG
         # screenshot = sct.grab(monitor)
         # img = np.array(screenshot)
-
         # # 转换颜色格式从 BGRA 到 BGR
         # img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
         # results = model(img)
@@ -110,12 +106,10 @@ def main():
         # cv2.imshow('Screen Capture', img)
         # if cv2.waitKey(1) & 0xFF == ord('q'):
         #     cv2.destroyAllWindows()
-
         while keep_running:
             # 截屏
             screenshot = sct.grab(monitor)
             img = np.array(screenshot)
-
             # 转换颜色格式从 BGRA 到 BGR
             img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
             results = model(img)
@@ -133,7 +127,6 @@ def main():
             # # 按 'q' 键退出
             # if cv2.waitKey(1) & 0xFF == ord('q'):
             #     break
-
         # # 释放所有窗口
         # cv2.destroyAllWindows()
 

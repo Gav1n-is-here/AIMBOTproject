@@ -1,4 +1,20 @@
-# [YOLOv10: Real-Time End-to-End Object Detection](https://arxiv.org/abs/2405.14458)
+# yolov10 AIMBOT项目
+唐硕10225101447
+核心代码位于detect.py，对1080p显示器中心区域进行推理，默认不追踪，按下p切换是否追踪，第一次按下追踪T阵营恐怖分子，按下l切换追踪目标即CT和T阵营目标切换，按下q停止项目
+
+
+mouseinput.py中定义了鼠标移动的方法
+加载模型，循环截图，推理图片，遍历boxes，方法查看都依照于yolov10-main\ultralytics\engine\results.py里类的定义，检查是否为想要追踪的类别，检查锚框的长宽比（排除尸体），找到所有符合的类别的目标中距离最近的并对其锁定
+
+在定义距离时对头部距离加上乘子0.6可以实现智能追踪头部，如果头部太小检测不到也会顺势锁定身体，可以解决头部锁定成功率低，也避免了放着近距离但检测不到头的敌人不打扭头锁更遥远目标的头这种异常行为
+
+基于kaggle的特斯拉P100时，基于yolov10n只需要1.8毫秒推理时间，最大的yolov10b也只需要9.6ms，p100的算力相较于4060等新架构卡并不高，理论上有极高的实用可能性，只截取640*640的图像，可以实现上百帧的推理；但是我只有cpu可供推理，基于r5 5600，在单纯推理下耗时约80ms一个循环，开启游戏和OBS后就要280ms一个循环，录制视频效果极差；试图去网吧运行，但是因为网吧电脑重启之后的重置，无法安装cuda，遂失败。
+
+yolov10去除了NMS,使用两个v8的损失函数求和，对比v5的性能提升：
+![v10n](v10b.jpg)
+![v5s训练结束没有输出推理时间不好横向毕竟](v5s.jpg)
+
+<!-- # [YOLOv10: Real-Time End-to-End Object Detection](https://arxiv.org/abs/2405.14458)
 
 
 Official PyTorch implementation of **YOLOv10**.
@@ -178,4 +194,4 @@ If our code or models help your work, please cite our paper:
   journal={arXiv preprint arXiv:2405.14458},
   year={2024}
 }
-```
+``` -->
