@@ -1,2 +1,5 @@
 # AIMBOTproject
 AI fundamental期末大作业项目
+代码在对应分支
+使用yolov5完成
+在yolov10发布后基于ultralistic库的yolov10代码补充了更简洁的版本
