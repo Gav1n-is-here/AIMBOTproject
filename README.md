@@ -12,7 +12,7 @@ mouseinput.py中定义了鼠标移动的方法
 
 yolov10去除了NMS,使用两个v8的损失函数求和，对比v5的性能提升：
 ![v10n](v10b.jpg)
-![v5s训练结束没有输出推理时间不好横向毕竟](v5s.jpg)
+![v5s训练结束没有输出推理时间不好横向比较](v5s.jpg)
 
 <!-- # [YOLOv10: Real-Time End-to-End Object Detection](https://arxiv.org/abs/2405.14458)
 
