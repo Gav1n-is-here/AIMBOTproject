@@ -1,8 +1,13 @@
 # AIMBOTproject
 这里是AI fundamental期末大作业项目
+
 代码在对应分支
-分布是使用yolov5完成的基础版本
+
+分别是使用yolov5完成的基础版本
+
 在yolov10发布后基于ultralistic库的yolov10代码完善了逻辑的版本
+
 main分支下有演示视频和ppt，其中演示视频均在cpu上推理，v10视频在obs，游戏和推理同时消耗cpu资源且是六核cpu因此推理耗时280ms高得异常，但v10n的模型在和v5同样条件的8核下约70ms。
+
 具体的报告在v5和v10各种分支下的readme
 
